@@ -1,0 +1,32 @@
+<form>
+    <fieldset>
+        <label for="Order_ID">Order ID</label>
+        <input type="number" name="Order_ID" placeholder="Order ID" [(ngModel)]="formData.Order_ID"/>
+    </fieldset>
+    <fieldset>
+        <label for="Crust">Crust</label>
+        <input type="text" name="Crust" placeholder="Crust" [(ngModel)]="formData.Crust"/>
+    </fieldset>
+    <fieldset>
+        <label for="Flavor">Flavor</label>
+        <input type="text" name="Flavor" placeholder="Flavor" [(ngModel)]="formData.Flavor"/>
+    </fieldset>
+    <fieldset>
+        <label for="Table_No">Table_No</label>
+        <input type="text" name="Table_No" placeholder="Table no" [(ngModel)]="formData.Table_No"/>
+    </fieldset>
+    <fieldset>
+        <label for="Size">Size</label>
+        <input type="text" name="Size" placeholder="Size" [(ngModel)]="formData.Size"/>
+    </fieldset>
+    <fieldset>
+        <label for="Timestamp">Timestamp</label>
+        <input type="number" name="Timestamp" placeholder="Timestamp" [(ngModel)]="formData.Timestamp"/>
+    </fieldset>
+    <fieldset>
+        <label for="id">ID</label>
+        <input type="number" name="id" placeholder="Enter ID" [(ngModel)]="formData.id"/>
+    </fieldset>
+    <button class="btn btn-primary" (click)="reset()">Reset</button>
+    <button class="btn btn-primary" (click)="makeOrder()">Make Order</button>
+</form>

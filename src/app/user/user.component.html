@@ -1,0 +1,18 @@
+<div *ngIf="signInMode">
+    <form>
+        <fieldset>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" [(ngModel)]="user.username" placeholder="Username"/>
+            <p *ngIf="showError">{{username_error}}</p>
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" [(ngModel)]="user.password" placeholder="Password"/>
+            <p *ngIf="showError">{{password_error}}</p>
+        </fieldset>
+        <button class="btn btn-secondary" (click)="login()">Login</button>
+    </form>
+</div>
+<div *ngIf="!signInMode">
+    You're signed out!
+</div>
