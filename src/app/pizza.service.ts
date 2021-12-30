@@ -34,11 +34,10 @@ export class PizzaService {
   }
 
   postOrder(data: any){
-    return this.http.post(this.url, {
+    return this.http.post(this.url, JSON.stringify(data), {
       'headers': new HttpHeaders({
         'Content-Type': 'application/json'
-      }),
-      'body': data
+      })
     }).pipe(
       tap(data => console.log(data)),
       catchError(this.handleError('postOrder', []))

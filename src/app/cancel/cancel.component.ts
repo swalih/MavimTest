@@ -21,7 +21,8 @@ export class CancelComponent implements OnInit {
     let id = url.substring(url.lastIndexOf('/') + 1);
 
     if(id.match(/[0-9]+/) && parseInt(id) > 0){ //id is an integer and is greater than 0
-      this.deleteOrder(id);
+      //this.deleteOrder(id);
+      this.onDelete();
     }
   }
 
@@ -45,7 +46,9 @@ export class CancelComponent implements OnInit {
   onDelete(){
     console.log(this.delete_id);
     if(this.delete_id > 0){
-      this.deleteOrder(this.delete_id);
+      this.msg.postMessageWithConfirm("Confirm Delete?", () => {
+        this.deleteOrder(this.delete_id)
+      });
     }    
   }
 

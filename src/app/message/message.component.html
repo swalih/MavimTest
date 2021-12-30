@@ -1,3 +1,7 @@
-<div *ngIf="show" class="alert alert-info" [style.display]="show">
+<div id="message-box" *ngIf="show" class="alert alert-info" [style.display]="show">
     <p>{{message}}</p>
+    <div *ngIf="isConfirm()">
+        <button class="btn-danger" (click)="confirmAction()">Confirm</button>
+        <button class="btn-primary" (click)="ignoreAction()">Ignore</button>
+    </div>  
 </div>

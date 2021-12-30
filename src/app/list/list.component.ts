@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaService } from '../pizza.service';
 import { MessageService } from '../message.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-list',
@@ -8,7 +9,7 @@ import { MessageService } from '../message.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  data: any = [];
+  data: any = null;
 
   sort_key: string|number = "";
   sort_asc = true;
@@ -59,5 +60,25 @@ export class ListComponent implements OnInit {
     }
   }
 
+  deleteOrder(id: string){
+    console.log(id);
+    if(parseInt(id) > 0){
+      this.message.postMessageWithConfirm("Confirm Delete?", () => {
+        this.service.cancelOrder(parseInt(id))
+          .subscribe(res => {
+            if(res instanceof HttpErrorResponse){
+              if(res.status == 404)
+                this.message.postMessage('Item do not exist to be deleted.');
+              else
+                this.message.postMessage('Other error.')
+            }
+            else
+              this.message.postMessage('Item successfully deleted.');
+              
+            this.refresh();
+          });
+      });
+    }  
+  }
 
 }

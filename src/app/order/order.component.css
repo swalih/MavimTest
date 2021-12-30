@@ -19,4 +19,9 @@ input{
     margin-left: 3px;
     padding: 2px 2px;
     text-indent: 2px;
+    width: 300px;
+}
+
+input[type=date], input[type=time]{
+    width: 200px;
 }

@@ -20,10 +20,12 @@
             <td>{{item['Table_No']}}</td>
             <td>{{item['Timestamp']}}</td>
             <td>{{item['id']}}</td>
-            <td><button routerLink="/cancel/{{item['id']}}" class="btn-danger">Cancel</button></td>
+            <td><button (click)="deleteOrder(item['id'])" class="btn-danger">Cancel</button></td>
         </tr>
     </table>
 </div>
 <ng-template #loading>
-    Loading...
+    <span class="sr-only">Loading...</span>
+    <div style="display: block;" class="spinner-border text-primary" role="status">
+    </div>
 </ng-template>

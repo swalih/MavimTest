@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PizzaService } from '../pizza.service';
 import { MessageService } from '../message.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Order, OrderForView } from './order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -9,13 +11,15 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  formData = {
+  formData: OrderForView = {
     'Crust': "",
     'Flavor': "",
     'Size': "",
     'Order_ID': 0,
     'Table_No': "",
     'Timestamp': 0,
+    'Timestamp_Date': new Date(),
+    'Timestamp_Time': "",
     'id': 0
   }
 
@@ -32,21 +36,14 @@ export class OrderComponent implements OnInit {
   };
 
   constructor(private service: PizzaService, 
-          private msg: MessageService) { }
+          private msg: MessageService,
+          private router: Router) { }
 
   ngOnInit(): void {
   }
 
   reset(){
-    this.formData = {
-      'Crust': "",
-      'Flavor': "",
-      'Size': "",
-      'Order_ID': 0,
-      'Table_No': "",
-      'Timestamp': 0,
-      'id': 0
-    };
+    this.formData = {} as OrderForView;
 
     this.resetError();
   }
@@ -58,9 +55,17 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  computeTimestamp(){
+    let timestamp = new Date(this.formData.Timestamp_Date).getTime();
+    let timeSplit = this.formData.Timestamp_Time.split(':').map(x => parseInt(x))
+    timestamp += timeSplit[0] * 60 + timeSplit[1];
+    return timestamp;
+  }
+
   validate(){
     this.resetError();
     console.log(this.formData);
+
     if(this.formData.Crust.length <= 0)
       this.errorMsg.crust.active = true;
 
@@ -73,6 +78,7 @@ export class OrderComponent implements OnInit {
     if(this.formData.Table_No.length <= 0)
       this.errorMsg.table_no.active = true;
 
+    this.formData.Timestamp = this.computeTimestamp(); 
     if(this.formData.Timestamp < ((new Date().getTime() / 1000) - (10 * 60))) //within last 10 minutes
       this.errorMsg.timestamp.active = true;
 
@@ -95,19 +101,35 @@ export class OrderComponent implements OnInit {
       this.msg.postMessage("Data does not meet validation standards.");
       return;
     }
-    
-    this.service.postOrder(this.formData)
+  
+    let postData: any = {};
+    Object.keys(this.formData).forEach(key  => {
+      if(key == "Timestamp_Date" || key == "Timestamp_Time")
+        return;
+
+      postData[key] = this.formData[key as keyof OrderForView];
+    });
+
+    console.log(postData);
+
+    this.service.postOrder(postData)
       .subscribe(res => {
+        this.reset();
         if(res instanceof HttpErrorResponse){
           if(res.status == 404)
             this.msg.postMessage('Item already exists.');
           else
             this.msg.postMessage('Other error.')
         }
-        else
+        else{
           this.msg.postMessage('Item successfully added.');
+          this.router.navigate(['/', 'list']);
+        }
       });
-    this.reset();
+  }
+
+  timestampTimeFieldInput(e: Event){
+      this.formData.Timestamp_Time = (e.target as HTMLInputElement).value;    
   }
 
 }
