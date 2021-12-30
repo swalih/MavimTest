@@ -1,0 +1,39 @@
+<form>
+    <fieldset class="form-group">
+        <label for="Order_ID">Order ID</label>
+        <input type="number" class="form-control" name="Order_ID" placeholder="Order ID" [(ngModel)]="formData.Order_ID"/>
+        <p class="alert-warning" *ngIf="errorMsg.order_id.active">{{errorMsg.order_id.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="Crust">Crust</label>
+        <input type="text"  class="form-control"  name="Crust" placeholder="Crust" [(ngModel)]="formData.Crust"/>
+        <p class="alert-warning" *ngIf="errorMsg.crust.active">{{errorMsg.crust.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="Flavor">Flavor</label>
+        <input type="text"  class="form-control"  name="Flavor" placeholder="Flavor" [(ngModel)]="formData.Flavor"/>
+        <p class="alert-warning" *ngIf="errorMsg.flavor.active">{{errorMsg.flavor.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="Table_No">Table No</label>
+        <input type="text"  class="form-control"  name="Table_No" placeholder="Table no" [(ngModel)]="formData.Table_No"/>
+        <p class="alert-warning" *ngIf="errorMsg.table_no.active">{{errorMsg.table_no.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="Size">Size</label>
+        <input type="text"  class="form-control"  name="Size" placeholder="Size" [(ngModel)]="formData.Size"/>
+        <p class="alert-warning" *ngIf="errorMsg.size.active">{{errorMsg.size.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="Timestamp">Timestamp</label>
+        <input type="number"  class="form-control"  name="Timestamp" placeholder="Timestamp" [(ngModel)]="formData.Timestamp"/>
+        <p class="alert-warning" *ngIf="errorMsg.timestamp.active">{{errorMsg.timestamp.msg}}</p>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="id">ID</label>
+        <input type="number"  class="form-control"  name="id" placeholder="Enter ID" [(ngModel)]="formData.id"/>
+        <p class="alert-warning" *ngIf="errorMsg.id.active">{{errorMsg.id.msg}}</p>
+    </fieldset>
+    <button class="btn btn-primary" (click)="reset()">Reset</button>
+    <button class="btn btn-primary" (click)="makeOrder()">Make Order</button>
+</form>

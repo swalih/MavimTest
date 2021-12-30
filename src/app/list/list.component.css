@@ -1,0 +1,31 @@
+#refresh-btn{
+    margin: 5px 4px;
+}
+
+table{
+    margin: 5px;
+    table-layout: fixed;
+}
+
+tr:hover{
+    background-color: antiquewhite;
+}
+
+th{
+    background-color: lightblue;
+    cursor: pointer;
+    user-select: none;
+    
+}
+th:hover::after{
+    position: absolute;
+    content: ' · ';
+}
+
+th, td{
+    padding: 8px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid bisque;
+}

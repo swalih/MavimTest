@@ -1,0 +1,19 @@
+nav{
+    text-align: right;
+    margin: 5px 4px;
+    padding-bottom: 10px;
+    border-bottom: 4px solid lightseagreen;
+}
+
+nav button{
+    margin-right: 4px;
+}
+
+@media (max-width: 500px){
+    nav{
+        text-align: left;
+    }
+    nav button{
+        margin: 5px;
+    }
+}

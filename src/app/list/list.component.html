@@ -1,0 +1,29 @@
+<button id="refresh-btn" class="btn btn-primary" (click)="refresh()">Refresh</button>
+<div *ngIf="data; else loading">
+    <p>Click a column header to sort pizza orders.</p>
+    <table class="table-light">
+        <tr>
+            <th scope='col' (click)="sortBy('Crust')">Crust</th>
+            <th scope='col' (click)="sortBy('Flavor')">Flavor</th>
+            <th (click)="sortBy('Order_ID')">Order ID</th>
+            <th (click)="sortBy('Size')">Size</th>
+            <th (click)="sortBy('Table_No')">Table no</th>
+            <th (click)="sortBy('Timestamp')">Timestamp</th>
+            <th (click)="sortBy('id')">ID</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let item of data">
+            <td>{{item['Crust']}}</td>
+            <td>{{item['Flavor']}}</td>
+            <td>{{item['Order_ID']}}</td>
+            <td>{{item['Size']}}</td>
+            <td>{{item['Table_No']}}</td>
+            <td>{{item['Timestamp']}}</td>
+            <td>{{item['id']}}</td>
+            <td><button routerLink="/cancel/{{item['id']}}" class="btn-danger">Cancel</button></td>
+        </tr>
+    </table>
+</div>
+<ng-template #loading>
+    Loading...
+</ng-template>
