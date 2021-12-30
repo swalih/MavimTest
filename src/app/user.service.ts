@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { CanActivate } from '@angular/router';
 
 import { User } from './user/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements CanActivate {
   private url = "https://61b6012ac95dd70017d40dcd.mockapi.io/api/V1";
 
   user_logged_in = false;
@@ -17,7 +18,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
     //for debugging purposes only
-    this.user_logged_in = true;
+    //this.user_logged_in = true;
+  }
+
+  canActivate(){
+    return this.user_logged_in;
   }
 
   clearUser(){

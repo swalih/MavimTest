@@ -9,15 +9,20 @@ import { MessageService } from '../message.service';
 })
 export class MessageComponent implements OnInit {
   message: String = "";
-  show = true;
+  show = false;
 
   constructor(private service: MessageService) { }
 
   ngOnInit(): void {
     this.service.getMessage()
     .subscribe(msg => {
+      this.show = true;
       this.message = msg;
-      setTimeout(() => this.message = "", 5000);
+      
+      setTimeout(() => {
+        this.message = "";
+        this.show = false;
+      }, 5000);
     });
   }
 

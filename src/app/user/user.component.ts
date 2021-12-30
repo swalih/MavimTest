@@ -18,7 +18,8 @@ export class UserComponent implements OnInit {
     'password': ""
   };
 
-  showError = false;
+  show_un_error = false;
+  show_pw_error = false;
   username_error = "";
   password_error = "";
 
@@ -36,7 +37,7 @@ export class UserComponent implements OnInit {
   }
 
   login(){
-    this.showError = false;
+    this.show_pw_error = this.show_un_error = false;
     if(this.validate()){
         let valid = this.service.verifyUser(this.user);
         //valid.subscribe(data => console.log(data));
@@ -49,13 +50,14 @@ export class UserComponent implements OnInit {
   validate(){
     if(this.user.username.length <= 0 || !this.user.username.match(/[A-Za-z0-9]+/)){
       this.username_error = "User is either empty or is using unexpected characters.";
-      this.showError = true;
+      this.show_un_error = true;
     }
     if(this.user.password.length <= 0){
       this.password_error = "Password can't be empty.";
-      this.showError = true;
+      this.show_pw_error = true;
     }
-    return !this.showError; //i.e, validated if no error is shown.
+ 
+    return !(this.show_pw_error || this.show_un_error); //i.e, validated if no error is shown.
   }
 
 }

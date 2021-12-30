@@ -23,6 +23,8 @@ export class ListComponent implements OnInit {
     this.service.getList()
     .subscribe(data => {
         this.data = data;
+        for(let x in data)
+          this.data[x]['id'] = parseInt(this.data[x]['id'])
         if(this.data.length <= 0)
           this.message.postMessage("Data failed to load due to network error.");
     });

@@ -1,14 +1,14 @@
 <div *ngIf="signInMode">
     <form>
-        <fieldset>
+        <fieldset class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" [(ngModel)]="user.username" placeholder="Username"/>
-            <p *ngIf="showError">{{username_error}}</p>
+            <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username" placeholder="Username"/>
+            <p *ngIf="show_un_error" class="alert-warning">{{username_error}}</p>
         </fieldset>
-        <fieldset>
+        <fieldset class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" [(ngModel)]="user.password" placeholder="Password"/>
-            <p *ngIf="showError">{{password_error}}</p>
+            <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password" placeholder="Password"/>
+            <p *ngIf="show_pw_error" class="alert-warning">{{password_error}}</p>
         </fieldset>
         <button class="btn btn-secondary" (click)="login()">Login</button>
     </form>
