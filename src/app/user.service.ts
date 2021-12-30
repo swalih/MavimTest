@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { CanActivate } from '@angular/router';
 
 import { User } from './user/user';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService implements CanActivate {
   user: User = {} as User;
 
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private msg: MessageService) { 
     //for debugging purposes only
     //this.user_logged_in = true;
   }
@@ -45,6 +46,7 @@ export class UserService implements CanActivate {
         return true;
       }
 
+      this.msg.postMessage("Bad credentials");
       return false;
   }
 
