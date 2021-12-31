@@ -25,8 +25,9 @@
         <p class="alert-warning" *ngIf="errorMsg.size.active">{{errorMsg.size.msg}}</p>
     </fieldset>
     <fieldset class="form-group">
-        <label for="Timestamp">Timestamp</label>
-        <input type="number"  class="form-control"  name="Timestamp" placeholder="Timestamp" [(ngModel)]="formData.Timestamp"/>
+        <label for="Timestamp_Date">Timestamp</label>
+        <input type="date"  class="form-control"  name="Timestamp_Date" [(ngModel)]="formData.Timestamp_Date"/>
+        <input type="time"  class="form-control" name="Timestamp_Time"  (input)="timestampTimeFieldInput($event)"/>
         <p class="alert-warning" *ngIf="errorMsg.timestamp.active">{{errorMsg.timestamp.msg}}</p>
     </fieldset>
     <fieldset class="form-group">

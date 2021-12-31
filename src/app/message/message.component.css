@@ -1,10 +1,15 @@
-div{
+#message-box{
+    box-sizing: border-box;
     position: fixed;
     bottom: 0;
     left: 10px;
     margin-top: 10px;
-    display: inline-block;
+    display: block;
     padding: 3px;
 
     font-weight: bold;
+}
+
+button{
+    margin: 2px;
 }

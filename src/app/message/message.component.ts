@@ -19,15 +19,31 @@ export class MessageComponent implements OnInit {
       this.show = true;
       this.message = msg;
       
-      setTimeout(() => {
-        this.message = "";
-        this.show = false;
-      }, 5000);
+      if(!this.service.confirm){
+        setTimeout(() => {
+          this.message = "";
+          this.show = false;
+        }, 5000);
+      }
+
     });
+  }
+
+  isConfirm(){
+    return this.service.confirm;
   }
 
   setShow(val: boolean){
     this.show = val;
+  }
+
+  confirmAction(){
+    if(this.service.callback)
+      this.service.callback()
+  }
+
+  ignoreAction(){
+    this.setShow(false)
   }
 
 }
